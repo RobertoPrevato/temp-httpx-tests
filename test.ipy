@@ -1,0 +1,43 @@
+"""
+This test compares a simple HTTP GET request using the built-in urllib package running
+in a executor with httpx.AsyncClient.get.
+
+Run using ipython:
+
+- ipython test-1.ipy
+"""
+
+import asyncio
+import httpx
+from example.http import HTTPHandler  # same as blacksheep.utils.aio.HTTPHandler
+from blacksheep.client import ClientSession
+
+client = httpx.AsyncClient()
+
+loop = asyncio.new_event_loop()
+
+basic_handler = HTTPHandler()
+
+session = ClientSession(loop)
+
+print("*** Plain text ***")
+
+print("Running %timeit using urllib in executor:")
+%timeit loop.run_until_complete(basic_handler.fetch("http://127.0.0.1:44778"))
+
+print("\nRunning %timeit using httpx.AsyncClient:")
+%timeit loop.run_until_complete(client.get("http://127.0.0.1:44778"))
+
+print("\nRunning %timeit using blacksheep.client:")
+%timeit loop.run_until_complete(session.get("http://127.0.0.1:44778"))
+
+print("\n*** JSON ***")
+
+print("Running %timeit using urllib in executor:")
+%timeit loop.run_until_complete(basic_handler.fetch("http://127.0.0.1:44778/plain-json"))
+
+print("\nRunning %timeit using httpx.AsyncClient:")
+%timeit loop.run_until_complete(client.get("http://127.0.0.1:44778/plain-json"))
+
+print("\nRunning %timeit using blacksheep.client:")
+%timeit loop.run_until_complete(session.get("http://127.0.0.1:44778/plain-json"))
