@@ -138,3 +138,15 @@ Running %timeit using httpx.AsyncClient:
 Running %timeit using blacksheep.client:
 18.1 ms ± 264 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 ```
+
+```
+*** Plain text, parallel 20 ***
+Running %timeit using urllib in executor:
+18.8 ms ± 481 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+
+Running %timeit using httpx.AsyncClient:
+30.5 ms ± 586 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+
+Running %timeit using blacksheep.client:
+17.4 ms ± 405 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+```
