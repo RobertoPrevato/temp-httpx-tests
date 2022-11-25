@@ -86,3 +86,35 @@ Running %timeit using blacksheep.client:
 Maybe using iPython %timeit is not the right way to run performance checks,
 however all three clients are tested in the same way and consistent results
 were obtained testing with different HTTP servers.
+
+---
+
+Note that all clients successfully get the information from the server:
+
+```ipython
+Python 3.11.0 (main, Oct 30 2022, 14:13:55) [GCC 11.3.0]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 8.6.0 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: import asyncio
+   ...: import httpx
+   ...: from example.http import HTTPHandler
+   ...: from blacksheep.client import ClientSession
+   ...:
+   ...: client = httpx.AsyncClient()
+   ...:
+   ...: loop = asyncio.new_event_loop()
+   ...:
+   ...: basic_handler = HTTPHandler()
+   ...:
+   ...: session = ClientSession(loop)
+
+In [2]: loop.run_until_complete(basic_handler.fetch("http://127.0.0.1:44778"))
+Out[2]: b'Hello, World!'
+
+In [3]: loop.run_until_complete(client.get("http://127.0.0.1:44778"))
+Out[3]: <Response [200 OK]>
+
+In [4]: loop.run_until_complete(session.get("http://127.0.0.1:44778"))
+Out[4]: <Response 200>
+```
