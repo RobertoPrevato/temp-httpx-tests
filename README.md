@@ -26,8 +26,8 @@ See [this discussion on Mastodon for more information](https://masto.ai/@roberto
 1. create a virtual environment `python3.11 -m venv venv && source venv/bin/activate`
 2. install `pip install -r requirements.txt`
 3. start the `Flask` server in a terminal (`python server.py`)
-4. start `test.ipy` using `iPython` with `ipython test.ipy`
-5. compare the results
+4. start `test.ipy` using `iPython` with `ipython test.ipy` in a different terminal
+5. read the results of `%timeit`
 
 The test server is just a development server, but I got similar results using
 `uvicorn` as HTTP server (of course, with overall better response times,
