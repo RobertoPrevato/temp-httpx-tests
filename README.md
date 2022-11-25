@@ -118,3 +118,23 @@ Out[3]: <Response [200 OK]>
 In [4]: loop.run_until_complete(session.get("http://127.0.0.1:44778"))
 Out[4]: <Response 200>
 ```
+
+### Parallel test
+
+Test starting 20 web requests at a time.
+
+```bash
+ipython test-parallel.ipy
+```
+
+```
+*** Plain text, parallel 20 ***
+Running %timeit using urllib in executor:
+18.5 ms ± 465 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+
+Running %timeit using httpx.AsyncClient:
+31.5 ms ± 1.18 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+
+Running %timeit using blacksheep.client:
+18.1 ms ± 264 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+```
